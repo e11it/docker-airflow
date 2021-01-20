@@ -1,10 +1,10 @@
-# VERSION 1.10.9
+# VERSION 2.0.0
 # AUTHOR: Matthieu "Puckel_" Roisil
 # DESCRIPTION: Basic Airflow container
 # BUILD: docker build --rm -t puckel/docker-airflow .
 # SOURCE: https://github.com/puckel/docker-airflow
 
-FROM python:3.7-slim-buster
+FROM python:3.8-slim-buster
 LABEL maintainer="Puckel_"
 
 # Never prompt the user for choices on installation/configuration of packages
@@ -12,7 +12,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
 # Airflow
-ARG AIRFLOW_VERSION=1.10.9
+ARG AIRFLOW_VERSION=2.0.0
 ARG AIRFLOW_USER_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=""
@@ -32,7 +32,7 @@ RUN set -ex \
     && buildDeps=' \
         freetds-dev \
         libkrb5-dev \
-        libsasl2-dev \
+        libldap2-dev \
         libssl-dev \
         libffi-dev \
         libpq-dev \
@@ -46,6 +46,9 @@ RUN set -ex \
         build-essential \
         default-libmysqlclient-dev \
         apt-utils \
+        libsasl2-2 \
+        libsasl2-dev \
+        libsasl2-modules \
         curl \
         rsync \
         netcat \
